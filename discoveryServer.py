@@ -1,4 +1,3 @@
-
 import rpyc
 from ipyparallel import Client
 from rpyc.utils.server import ThreadedServer
@@ -7,7 +6,7 @@ class DiscoveryService(rpyc.Service):
     def __init__(self) :
         pass
         
-    exposed_my_port = port
+    exposed_my_port = 11111
     ALIASES = ["Discovery"]
     
     def on_connect(self, conn):
@@ -66,7 +65,6 @@ if __name__ == "__main__":
 	dict_leader_quality = {}  # key is id
 	dict_of_networks = {}     # key is id
 	list_of_leaders = []
-    t = ThreadedServer(DiscoveryService, port=port, protocol_config={
-    'allow_setattr': True, 'allow_public_attrs': True,
-})
-    t.start()
+	t=ThreadedServer(DiscoveryService,port=port,protocol_config={'allow_setattr':True,'allow_public_attrs':True})
+	print("Starting the server")
+	t.start()
