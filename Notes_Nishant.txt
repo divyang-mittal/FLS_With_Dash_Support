@@ -1,1 +1,5 @@
 Discovery Service used to get group ids and leader ids corresponding to that group. Simply, provides the IP of the leader and may or may not assign a unique ID.
+Too many syntax errors.
+Need to remove the ipyparallel module from the latent files.
+Will separately create modules where discovery service, peer service, and live service class templates will be given.
+In test folder, simply create a make file to instantiate as many peers as you'd like, use port as a parameter, discovery service for time being can check if same port is not being reused and validate accordingly.
