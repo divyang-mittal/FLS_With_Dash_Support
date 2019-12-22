@@ -1,0 +1,1 @@
+Discovery Service used to get group ids and leader ids corresponding to that group. Simply, provides the IP of the leader and may or may not assign a unique ID.
