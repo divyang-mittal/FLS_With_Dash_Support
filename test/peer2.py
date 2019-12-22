@@ -28,8 +28,8 @@ class PeerService(rpyc.Service):
         import rpyc
         global connector_peer
         connector_peer =  rpyc.connect("localhost", port)
-        global count_peer
-        count_peer += 1
+        # global count_peer
+        # count_peer += 1
 
 def foo(PeerService):
     import rpyc
