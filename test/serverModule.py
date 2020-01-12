@@ -2,13 +2,11 @@ import rpyc
 import time
 from ipyparallel import Client
 from rpyc.utils.server import ThreadedServer
-global dict_get_id
-global dict_get_port
-global peercount
-global dict_leader_quality 
-global list_of_leaders
-global dict_of_networks
-global quality_index
+rpyc.core.protocol.DEFAULT_CONFIG['allow_pickle'] = True
+rpyc.core.protocol.DEFAULT_CONFIG['allow_setattr'] = True
+rpyc.core.protocol.DEFAULT_CONFIG['allow_public_attrs'] = True
+
+
 class DiscoveryService(rpyc.Service):
     def __init__(self) :
         pass        
@@ -60,7 +58,6 @@ class DiscoveryService(rpyc.Service):
         global dict_get_port
         return dict_get_port[port_id]
 
-
 class ServerModule():
     def __init__(self, serverPort, quality) :
         global dict_get_id
@@ -78,7 +75,7 @@ class ServerModule():
         dict_leader_quality = {}  # key is id
         dict_of_networks = {}     # key is id
         list_of_leaders = []
-        t=ThreadedServer(DiscoveryService,port=port,protocol_config={'allow_setattr':True,'allow_public_attrs':True})
+        t=ThreadedServer(DiscoveryService,port=port, protocol_config = rpyc.core.protocol.DEFAULT_CONFIG)
         print("Starting the server")
         t.start()
 
