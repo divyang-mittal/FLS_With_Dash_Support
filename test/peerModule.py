@@ -1,6 +1,5 @@
 import rpyc
 import time
-from ipyparallel import Client
 from rpyc.utils.server import ThreadedServer
 rpyc.core.protocol.DEFAULT_CONFIG['allow_pickle'] = True
 rpyc.core.protocol.DEFAULT_CONFIG['allow_setattr'] = True
@@ -36,28 +35,18 @@ class PeerModule():
             # global count_peer
             # count_peer += 1
 
-    def foo(PeerService):
-        import rpyc
-        from rpyc.utils.server import ThreadedServer
-        t = ThreadedServer(PeerService, port=self.port, protocol_config = rpyc.core.protocol.DEFAULT_CONFIG)
-        t.start()
-        return 'bar'
-
     def __init__(self, port, quality, server_port):
         self.port = port
         self.quality = quality
         self.is_leader = False
         self.count_peer = 0
-        rc = Client()
-        lb_view = rc.load_balanced_view()
-        print("Profile: %s" % rc.profile)
-        print("Engines: %s" % len(lb_view))
         connection_server = rpyc.connect("localhost", server_port, config = rpyc.core.protocol.DEFAULT_CONFIG)
         connection_server.root.update(port)
         self_id = connection_server.root.get_id(port)
         self.list_of_peers = connection_server.root.get_network(self_id, quality)
         print("MY Port :",  self.port)
-        rc[1].apply(self.foo, self.PeerService)
+        t = ThreadedServer(self.PeerService, port=self.port, protocol_config = rpyc.core.protocol.DEFAULT_CONFIG)
+        t.start()
         # time.sleep(1)
         print("Hello")
         for peer in self.list_of_peers:
@@ -70,5 +59,4 @@ class PeerModule():
             self.count_peer += 1
         if(self.count_peer == 0):
             self.is_leader = True
-        time.sleep(10000)
     

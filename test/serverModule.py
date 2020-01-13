@@ -1,6 +1,5 @@
 import rpyc
 import time
-from ipyparallel import Client
 from rpyc.utils.server import ThreadedServer
 rpyc.core.protocol.DEFAULT_CONFIG['allow_pickle'] = True
 rpyc.core.protocol.DEFAULT_CONFIG['allow_setattr'] = True
@@ -75,7 +74,7 @@ class ServerModule():
         dict_leader_quality = {}  # key is id
         dict_of_networks = {}     # key is id
         list_of_leaders = []
-        t=ThreadedServer(DiscoveryService,port=port, protocol_config = rpyc.core.protocol.DEFAULT_CONFIG)
+        t=ThreadedServer(DiscoveryService, port=port, protocol_config = rpyc.core.protocol.DEFAULT_CONFIG)
         print("Starting the server")
         t.start()
 
