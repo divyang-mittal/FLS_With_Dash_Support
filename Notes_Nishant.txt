@@ -3,3 +3,4 @@ Too many syntax errors.
 Need to remove the ipyparallel module from the latent files.
 Will separately create modules where discovery service, peer service, and live service class templates will be given.
 In test folder, simply create a make file to instantiate as many peers as you'd like, use port as a parameter, discovery service for time being can check if same port is not being reused and validate accordingly.
+Refer https://www.digitalocean.com/community/tutorials/how-to-write-modules-in-python-3 for writing python3 modules.
