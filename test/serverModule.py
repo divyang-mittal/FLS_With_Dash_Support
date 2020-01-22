@@ -27,6 +27,9 @@ class DiscoveryService(rpyc.Service):
         global quality_index
         for leader in list_of_leaders:
             leader_quality = dict_leader_quality[leader]
+            print("leader_quality ", leader_quality)
+            print("peer_quality ", quality)
+            print("quality_index", quality_index)
             if( abs(leader_quality - quality) <= quality_index ) :   # add it to this network
                 list_of_ids = dict_of_networks[leader]
                 copy_of_ids = list_of_ids.copy()
