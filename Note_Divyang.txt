@@ -1,3 +1,1 @@
-First peer is able to connect to the server without any trouble.
-After second peer connects to the server an error occurs because peer 1 has not create a server 
-which is supposed to happen at line 60 in peerModule.py
+Discovery server is created and it's working fine till connection part
